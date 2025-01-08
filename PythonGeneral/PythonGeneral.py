@@ -209,16 +209,55 @@ print(square(4))
 
 ### 8. Sample Interview Problems for QA Automation Role
 
-# 1. Write a Python script to parse and validate JSON data from an API response.
-# 2. Create a function that detects memory leaks in a continuous data stream.
-# 3. Develop a Python script to automate testing of firmware update processes.
-# 4. Implement a function to simulate a network outage and recover a device.
-# 5. Write code to generate test logs, handle failures, and send email reports.
+# 1. Parse and Validate JSON data from an API response
+import json
+response = '{"status": 200, "message": "OK"}'
+try:
+    data = json.loads(response)
+    assert "status" in data and "message" in data
+    print("JSON is valid.")
+except Exception as e:
+    print(f"Invalid JSON: {e}")
 
-### Final Notes
-# Practice these patterns on LeetCode, especially focusing on:
-# - Sliding Window Problems
-# - Dynamic Programming (Fibonacci, Knapsack)
-# - Graph Algorithms (DFS, BFS, Dijkstra)
-# - Recursion and Backtracking (N-Queens, Subsets)
-# - Binary Search (Search Rotated Sorted Array)
+# 2. Detect Memory Leaks in Continuous Data Stream
+def detect_memory_leak(data_stream):
+    seen = set()
+    for data in data_stream:
+        if data in seen:
+            return True  # Memory leak detected
+        seen.add(data)
+    return False
+
+# 3. Automate Firmware Update Process
+import subprocess
+try:
+    result = subprocess.run(["firmware_update.sh"], check=True)
+    print("Firmware update successful.")
+except subprocess.CalledProcessError:
+    print("Firmware update failed.")
+
+# 4. Simulate Network Outage and Recover Device
+import time
+import os
+
+def simulate_outage():
+    os.system("sudo ifconfig eth0 down")  # Disable network
+    time.sleep(10)
+    os.system("sudo ifconfig eth0 up")  # Enable network
+
+# 5. Generate Test Logs, Handle Failures, Send Email Reports
+import logging
+import smtplib
+
+logging.basicConfig(filename='test.log', level=logging.INFO)
+try:
+    logging.info("Test started.")
+    # Simulate test
+    assert 1 == 1
+    logging.info("Test passed.")
+except AssertionError:
+    logging.error("Test failed.")
+    with smtplib.SMTP("smtp.example.com") as server:
+        server.sendmail("from@example.com", "to@example.com", "Test failed.")
+finally:
+    logging.info("Test completed.")
