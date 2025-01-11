@@ -33,6 +33,29 @@ print(sol.longestCommonPrefix([""]))                        # Output: ""
 print(sol.longestCommonPrefix(["a"]))                       # Output: "a"
 print(sol.longestCommonPrefix(["abc","abc","abc"]))         # Output: "abc"
 
+# Explanation:
+# Input: ["flower", "flow", "flight"]
+
+#     Step 1 (Edge case check):
+#         If the input is empty ([]), return "".
+#         (Not applicable here.)
+
+#     Step 2 (Initialize prefix):
+#         Start with the first string as the initial prefix:
+#     prefix = "flower"
+
+# Step 3 (Iterate through remaining strings):
+#     Compare the prefix with the second string "flow".
+#     Check if "flow" starts with "flower" → No, so shorten prefix to "flowe".
+#     Keep shortening until "flow" starts with "flow" → Yes.
+
+# Step 4 (Compare with next string):
+#     Compare "flow" with "flight".
+#     Shorten prefix step-by-step ("flow" → "flo" → "fl") until "flight" starts with "fl" → Yes.
+
+# Step 5 (Return the result):
+#     The final prefix is "fl", which is returned as the output.
+
 # Time Complexity: O(n * m)
 #     n: Number of strings in the input list.
 #     m: Length of the longest string in the input.

@@ -36,9 +36,14 @@ print(sol.isValid("{[]}"))      # Output: True
 print(sol.isValid("["))         # Output: False
 print(sol.isValid(""))          # Output: True
 
+# Explanation:
+# Key Observations:
+#     Brackets must be opened and closed in pairs ((), {}, []).
+#     Brackets must be nested properly, i.e., "([])" is valid, but "([)]" is not.
+#     A stack is ideal for solving this problem because it follows the Last In, First Out (LIFO) principle.
+
 # Time Complexity:
 #     O(n), where n is the length of the string.
 #     Each character is processed once.
-
 # Space Complexity:
 #     O(n), for the stack in the worst case when all characters are opening brackets.

@@ -25,6 +25,15 @@ class Solution(object):
             # This helps us track numbers we've seen so far and look them up quickly
             num_to_index[num] = i
 
+# Explanation:
+#     Hash Map Approach:
+#         Use a dictionary (num_to_index) to store each number and its corresponding index as we iterate through the list.
+
+#     Complement Check:
+#         For each number, calculate the complement (i.e., target - num).
+#         Check if the complement is already in the dictionary.
+#             If yes, we’ve found the pair, so return their indices.
+#             If no, add the current number and its index to the dictionary.
 
 # Time Complexity: O(n), since we traverse the list only once.
 # Space Complexity: O(n), for storing elements in the dictionary
