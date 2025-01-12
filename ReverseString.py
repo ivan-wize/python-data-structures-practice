@@ -4,6 +4,13 @@ class Solution(object):
         :type s: List[str]
         :rtype: None Do not return anything, modify s in-place instead.
         """
+
+    #     The string is given as a list of characters (s).
+    #     To reverse the string:
+    #         Swap the first character with the last, the second with the second-to-last, and so on.
+    #     Use a two-pointer approach:
+    #         One pointer starts at the beginning (left) and the other at the end (right).
+
         # Initialize two pointers: one at the start and one at the end of the list
         left, right = 0, len(s) - 1
         
@@ -15,24 +22,6 @@ class Solution(object):
             left += 1
             right -= 1
 
-# Explanation:
-# Key Observations:
-#     The string is given as a list of characters (s).
-#     To reverse the string:
-#         Swap the first character with the last, the second with the second-to-last, and so on.
-#     Use a two-pointer approach:
-#         One pointer starts at the beginning (left) and the other at the end (right).
-
-# Approach:
-#     Initialize Pointers:
-#         left points to the start of the list.
-#         right points to the end of the list.
-#     Swap Elements:
-#         Swap s[left] and s[right].
-#         Increment left and decrement right to move towards the center.
-#     Stop Condition:
-#         Stop when left >= right.
-
 # Time Complexity: O(n)
 #     The algorithm processes each character in the string once.
 
@@ -41,22 +30,18 @@ class Solution(object):
 
 sol = Solution()
 
-# Test case 1
 s = ["h", "e", "l", "l", "o"]
 sol.reverseString(s)
 print(s)  # Output: ["o", "l", "l", "e", "h"]
 
-# Test case 2
 s = ["H", "a", "n", "n", "a", "h"]
 sol.reverseString(s)
 print(s)  # Output: ["h", "a", "n", "n", "a", "H"]
 
-# Test case 3
 s = ["a"]
 sol.reverseString(s)
 print(s)  # Output: ["a"]
 
-# Test case 4
 s = ["a", "b"]
 sol.reverseString(s)
 print(s)  # Output: ["b", "a"]

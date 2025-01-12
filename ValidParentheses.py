@@ -4,27 +4,34 @@ class Solution(object):
         :type s: str  # Input: A string containing only '()', '[]', '{}'
         :rtype: bool  # Output: True if the string is valid, False otherwise
         """
-        # Use a stack to keep track of opening brackets
+
+        # A stack is ideal for solving this problem because it follows the Last In, First Out (LIFO) principle.
+
+        # Imagine we have a stack. It's like a pile of plates where we can add or remove from the top.
         stack = []
-        
-        # Create a mapping of closing to opening brackets
+
+        # Create a hashmap of closing to opening brackets
         bracket_map = {')': '(', '}': '{', ']': '['}
-        
-        # Iterate through each character in the string
+
+        # Iterate through each character in the input string
         for char in s:
-            # If the character is a closing bracket
+            # If the character is a closing bracket, like ')', ']', or '}'
             if char in bracket_map:
-                # Pop the top element from the stack if it's not empty, else use a dummy value '#'
+                # Use pop method and try to remove the top item from the stack.
+                # If the stack is empty, use a dummy value '#'.
                 top_element = stack.pop() if stack else '#'
-                
-                # Check if the popped element matches the corresponding opening bracket
+
+                # Now check if this top item matches the opening bracket for the current closing bracket.
+                # If it doesn't match, the string is invalid.
                 if bracket_map[char] != top_element:
                     return False
             else:
-                # If it's an opening bracket, push it onto the stack
+                # If the character is an opening bracket, like '(', '[', or '{'
+                # Just add it to the stack. It's like putting a plate on the pile.
                 stack.append(char)
         
-        # In the end, the stack should be empty if all brackets were matched properly
+        # At the end, if the stack is empty, it means all brackets matched perfectly.
+        # If there's anything left in the stack, it means some brackets didn't close properly.
         return not stack
 
 sol = Solution()
@@ -35,12 +42,6 @@ print(sol.isValid("([)]"))      # Output: False
 print(sol.isValid("{[]}"))      # Output: True
 print(sol.isValid("["))         # Output: False
 print(sol.isValid(""))          # Output: True
-
-# Explanation:
-# Key Observations:
-#     Brackets must be opened and closed in pairs ((), {}, []).
-#     Brackets must be nested properly, i.e., "([])" is valid, but "([)]" is not.
-#     A stack is ideal for solving this problem because it follows the Last In, First Out (LIFO) principle.
 
 # Time Complexity:
 #     O(n), where n is the length of the string.
