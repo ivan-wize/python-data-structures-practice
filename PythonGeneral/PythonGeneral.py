@@ -48,6 +48,92 @@ def two_sum(nums, target):
             return [seen[diff], i]
         seen[num] = i
 
+# Valid Parenthesis
+def is_valid(s):
+    stack = []
+    mapping = {')': '(', '}': '{', ']': '['}
+    for char in s:
+        if char in mapping:
+            top = stack.pop() if stack else '#'
+            if mapping[char] != top:
+                return False
+        else:
+            stack.append(char)
+    return not stack
+
+# Group Anagrams
+def group_anagrams(strs):
+    from collections import defaultdict
+    ans = defaultdict(list)
+    for s in strs:
+        ans[tuple(sorted(s))].append(s)
+    return list(ans.values())
+
+# Maximum Subarray
+def max_subarray(nums):
+    max_sum = nums[0]
+    current_sum = nums[0]
+    for num in nums[1:]:
+        current_sum = max(num, current_sum + num)
+        max_sum = max(max_sum, current_sum)
+    return max_sum
+
+# Spiral Matrix
+def spiral_order(matrix):
+    result = []
+    while matrix:
+        result += matrix.pop(0)
+        if matrix and matrix[0]:
+            for row in matrix:
+                result.append(row.pop())
+        if matrix:
+            result += matrix.pop()[::-1]
+        if matrix and matrix[0]:
+            for row in matrix[::-1]:
+                result.append(row.pop(0))
+    return result
+
+# Best Time to Buy and Sell Stock
+def max_profit(prices):
+    min_price = float('inf')
+    max_profit = 0
+    for price in prices:
+        if price < min_price:
+            min_price = price
+        elif price - min_price > max_profit:
+            max_profit = price - min_price
+    return max_profit
+
+# Reverse Integer
+def reverse(x):
+    sign = -1 if x < 0 else 1
+    x = abs(x)
+    result = 0
+    while x:
+        result = result * 10 + x % 10
+        x //= 10
+    result *= sign
+    return result if -2**31 <= result <= 2**31 - 1 else 0
+
+# Single Number
+def single_number(nums):
+    result = 0
+    for num in nums:
+        result ^= num
+    return result
+
+# Longest Common Prefix
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
+    prefix = strs[0]
+    for s in strs[1:]:
+        while not s.startswith(prefix):
+            prefix = prefix[:-1]
+            if not prefix:
+                return ""
+    return prefix
+
 # Reverse String
 s = "apple"
 print(s[::-1])
