@@ -1,0 +1,80 @@
+Jenkins Quick Reference
+1. Setting Up Jenkins
+Download Jenkins from jenkins.io.
+Install via WAR file or Docker image.
+Configure plugins:
+Git
+Pipeline
+Email Notifications
+2. Jenkins Pipeline Script Example
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'deploy.sh'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit 'target/surefire-reports/*.xml'
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+        }
+    }
+}
+
+Integrating Automation Framework with CI Tools
+1. Key Steps
+Prepare Test Suite: Ensure tests are modular and independent.
+Install Dependencies: Use environment setup scripts (e.g., requirements.txt, Docker).
+Trigger Tests: Use CI pipeline stages to execute test runners.
+Collect Results: Output test reports in CI-compatible formats (e.g., JUnit XML).
+Notify Stakeholders: Send build/test notifications (email, Slack, etc.).
+2. Example Jenkins Integration for Pytest
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'pytest --junitxml=results.xml'
+            }
+        }
+
+        stage('Publish Results') {
+            steps {
+                junit 'results.xml'
+            }
+        }
+    }
+}
+
