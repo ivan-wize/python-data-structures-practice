@@ -1,3 +1,12 @@
+# You're working on a team that validates battery performance on a mobile device. You are given two arrays of power data:
+#     measured_data: captured from a DC power analyzer connected to the battery during a test run.
+#     expected_data: the "correct" or reference power data generated from a simulation or a known-good run.
+# Each array contains floating-point numbers representing power usage in watts, sampled once per second.
+# Write a Python function that:
+#     Compares measured_data to expected_data.
+#     Flags all timestamps (index positions) where the absolute difference between the two exceeds a given threshold (e.g. 0.5W).
+#     Returns a list of these timestamp indices along with the delta (measured - expected) at that time.
+
 class Solution(object):
     def comparePowerData(self, measured_data, expected_data, threshold):
         """
@@ -65,6 +74,8 @@ try:
     print(sol.comparePowerData(measured_data, expected_data, threshold))
 except ValueError as e:
     print(e)
+
+
 # Expected Output: "Input arrays must be of the same length."
 
 # from typing import List, Tuple
