@@ -21,7 +21,7 @@ class Solution(object):
             else:
                 if start is not None:
                     segments.append((start, i - 1))
-                    start = None
+                    start = None 
 
         # If the last value is part of a segment, close it
         if start is not None:
