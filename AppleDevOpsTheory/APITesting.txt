@@ -1,0 +1,30 @@
+REST is a lightweight style of API, usually with JSON. SOAP is a heavier protocol that always uses XML and comes with strict contracts.
+JSON is today’s common lightweight data format, while XML is more verbose but supports richer validation and is still used in SOAP and some enterprise systems.
+
+Q5: “How do you validate a REST API?”
+Answer:
+Status codes (200, 400, 500).
+Response headers (Content-Type, caching, auth).
+JSON schema (fields, types).
+Cross-check API effects with database (Postgres/Snowflake).
+Negative cases: invalid params, missing auth, malformed payloads.
+“I always validate both the API response and the DB side effects to ensure data integrity.”
+
+Q8: “How do you validate a SOAP response?”
+Answer:
+Validate against the XSD schema.
+Assert presence of SOAP Envelope, Header, Body.
+Check fault codes for errors.
+Use XPath to assert field values inside nested XML.
+
+Q9: “How do you reconcile API data with database (Postgres/Snowflake)?”
+Answer:
+“I seed a test record, hit the API, then query the DB directly. In Postgres I validate row-level correctness,
+in Snowflake I validate aggregate metrics after ETL. This ensures end-to-end consistency.”
+
+
+
+
+
+
+
